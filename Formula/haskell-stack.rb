@@ -29,6 +29,8 @@ class HaskellStack < Formula
   def install
     system "cabal", "v2-update"
 
+    # This constraint config due to stack does not have upper bound for persistent and persistent-template.
+    # It can remove when stack's dependecy: pantry could build with newer persistent(2.13.0.0) and persistent-template(2.12.0.0)
     cabal_install_constraints = ["--constraint=persistent^>=2.11.0.0", "--constraint=persistent-template^>=2.9.1.0"]
     system "cabal", "v2-install", *std_cabal_v2_args, *cabal_install_constraints
   end
